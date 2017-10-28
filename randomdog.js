@@ -13,9 +13,9 @@ console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
 console.log('*****************************');
 
 // Should be run behind a reverse proxy
-const domain = 'random.dog'
+const domain = 'c9users.io'//'random.dog'
 const privatePort = 8080
-const host = `https://random.dog`
+const host = 'https://udemy-dev-bootcamp-rleitef.c9users.io'//`https://random.dog`
 
 Array.prototype.random = function () {
 	return this[Math.floor(Math.random() * this.length)]
@@ -50,7 +50,7 @@ updateDoggoCount()
 const app = express()
 const jsonParser = bodyParser.json()
 
-app.use(ua.middleware('UA-50585312-4', {cookieName: '_ga', https: true}));
+//app.use(ua.middleware('UA-50585312-4', {cookieName: '_ga', https: true}));
 
 app.use(fileUpload({
 	limits: {
@@ -92,19 +92,19 @@ function updateCache() {
 
 // API
 app.get('/woof.json', (req, res) => {
-	req.visitor.pageview(req.path).send()
+	//req.visitor.pageview(req.path).send()
 	res.status(200).json({
 		url: `${host}/${cache.random()}`
 	})
 })
 
 app.get('/woof', (req, res) => {
-	req.visitor.pageview(req.path).send()
+	//req.visitor.pageview(req.path).send()
 	res.status(200).send(cache.random())
 })
 
 app.get('/', (req, res) => {
-	req.visitor.pageview(req.path).send()
+	//req.visitor.pageview(req.path).send()
 	var doggo = cache.random()
 	if (path.extname(doggo) == '.mp4') {
 		res.status(200).send(helloworld({dogmp4: doggo, adopted: immortalDoggos}))
@@ -114,7 +114,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('*', (req, res, next) => {
-	req.visitor.pageview('*').send()
+	//req.visitor.pageview('*').send()
 	if (req.query.bone && checkHash(req.query.bone) === true) {
 		express.static('./' + newDogFolderName)(req, res, next)
 	} else {
@@ -123,12 +123,12 @@ app.get('*', (req, res, next) => {
 })
 
 app.get('/favicon.*', (req, res, next) => {
-	req.visitor.pageview("/favicon.*").send()
+	//req.visitor.pageview("/favicon.*").send()
 	express.static(".")(req, res, next)
 })
 
 app.get('/upload', (req, res) => {
-	req.visitor.pageview(req.path).send()
+	//req.visitor.pageview(req.path).send()
 	fs.readdir('./newdoggos/', (err, files) => {
 		res.status(200).send(upload({
 			dog: files,
@@ -138,7 +138,7 @@ app.get('/upload', (req, res) => {
 })
 
 app.post('/upload', (req, res) => {
-	req.visitor.pageview('POST ' + req.path).send()
+	//req.visitor.pageview('POST ' + req.path).send()
 	if (!req.files) return res.status(400).send('No files were uploaded.')
 
 	// Limit number of files in newdoggos folder to 50
@@ -160,7 +160,7 @@ app.post('/upload', (req, res) => {
 })
 
 app.get('/review', (req, res) => {
-	req.visitor.pageview(req.path).send()
+	//req.visitor.pageview(req.path).send()
 	if (!req.query.bone || checkHash(req.query.bone) === false) return res.sendStatus(401)
 	fs.readdir('./' + newDogFolderName + '/', (err, files) => {
 		if (err) {
@@ -180,7 +180,7 @@ app.get('/review', (req, res) => {
 const secret = JSON.parse(fs.readFileSync('./secret.json', 'utf8')).secret
 
 app.post('/review', jsonParser, (req, res) => {
-	req.visitor.pageview(req.path).send()
+	//req.visitor.pageview(req.path).send()
 	if (!req.query.bone || checkHash(req.query.bone) === false) return res.sendStatus(401)
 	if (!req.body) return res.sendStatus(400)
 	const dogName = req.body.dogName;
@@ -223,10 +223,23 @@ app.post('/review', jsonParser, (req, res) => {
 	}
 })
 
-app.listen(privatePort, (err) => {
-	if (err) return console.error(err.stack)
-	console.log(`Dogs barking at ${host}`)
-})
+// app.listen(privatePort, (err) => {
+// 	if (err) return console.error(err.stack)
+// 	console.log(`Dogs barking at ${host}`)
+// })
+
+// app.listen(process.env.PORT, process.env.IP , (err) => {
+// 	if (err) return console.error(err.stack)
+// 	console.log(`Dogs barking at ${host}`)
+// 	console.log(err)
+// })
+
+
+app.listen(process.env.PORT, process.env.IP, function(err){
+    console.log("YelpCamp server has started!");
+    console.log(err);
+    
+});
 
 function getDateTime() {
 	var date = new Date()

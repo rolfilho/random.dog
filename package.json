@@ -4,8 +4,7 @@
   "description": "The nodejs code behind http://random.dog",
   "main": "randomdog.js",
   "scripts": {
-    //"start": "nodemon -e js,hbs randomdog.js",
-    "start": "node randomdog.js",
+    "start": "nodemon -e js,hbs randomdog.js",
     "prodstart": "pm2 start process.yml",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -27,7 +26,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AdenFlorian/random.dog.git"
+    "url": "git+https://github.com/rolfilho/random.dog/random.dog.git"
   },
   "keywords": [
     "api",

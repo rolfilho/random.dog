@@ -4,7 +4,8 @@
   "description": "The nodejs code behind http://random.dog",
   "main": "randomdog.js",
   "scripts": {
-    "start": "nodemon -e js,hbs randomdog.js",
+    //"start": "nodemon -e js,hbs randomdog.js",
+    "start": "node randomdog.js",
     "prodstart": "pm2 start process.yml",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,6 +17,7 @@
     "express-fileupload": "^0.1.4",
     "fs-extra": "^4.0.2",
     "handlebars": "^4.0.10",
+    "nodemon": "^1.12.1",
     "passport": "^0.4.0",
     "universal-analytics": "^0.4.15",
     "uuid": "^3.1.0"

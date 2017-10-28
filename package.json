@@ -15,8 +15,8 @@
     "express": "^4.15.4",
     "express-fileupload": "^0.1.4",
     "fs-extra": "^4.0.2",
-    "handlebars": "^4.0.10",
     "nodemon": "^1.12.1",
+    "handlebars": "^4.0.10",
     "passport": "^0.4.0",
     "universal-analytics": "^0.4.15",
     "uuid": "^3.1.0"
